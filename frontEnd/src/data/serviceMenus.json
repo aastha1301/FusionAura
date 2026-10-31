@@ -1,0 +1,280 @@
+{
+  "menus": [
+    {
+      "id": "makeup",
+      "eyebrow": "For every celebration",
+      "title": "Makeup & Bridal",
+      "description": "Party, wedding and special-event looks by Fusion Aura.",
+      "icon": "✦",
+      "groups": [
+        {
+          "title": "Party Makeup",
+          "items": [
+            {
+              "name": "Normal Makeup",
+              "price": "₹2,000"
+            },
+            {
+              "name": "HD Makeup",
+              "price": "₹4,000"
+            }
+          ]
+        },
+        {
+          "title": "Haldi · Mehndi · Roka · Small Events",
+          "items": [
+            {
+              "name": "Normal Makeup",
+              "price": "₹5,000"
+            },
+            {
+              "name": "Premium HD Makeup",
+              "price": "₹8,000"
+            }
+          ]
+        },
+        {
+          "title": "Engagement · Reception · Cocktail · Sangeet",
+          "items": [
+            {
+              "name": "Normal Makeup",
+              "price": "₹10,000"
+            },
+            {
+              "name": "Premium HD Makeup",
+              "price": "₹15,000"
+            }
+          ]
+        },
+        {
+          "title": "Bridal Makeup",
+          "items": [
+            {
+              "name": "Normal Makeup",
+              "price": "₹20,000"
+            },
+            {
+              "name": "Premium HD Makeup",
+              "price": "₹25,000"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Normal package includes non-contouring makeup, Forever 52 products, hairdo, basic lashes and dupatta draping.",
+        "Premium HD includes contouring, high-definition makeup, premium products, hairdo, faux mink reusable lashes, lenses and dupatta draping.",
+        "Saree draping is chargeable for party makeup. Hair extensions, accessories and fresh flowers are not included."
+      ]
+    },
+    {
+      "id": "beauty-care",
+      "eyebrow": "A little time for you",
+      "title": "Bleach, Hands & Feet",
+      "description": "Everyday salon care and skin treats from the beauty menu.",
+      "icon": "❀",
+      "groups": [
+        {
+          "title": "Bleach & Body",
+          "items": [
+            {
+              "name": "Ammonia Free Bleach",
+              "price": "₹399"
+            },
+            {
+              "name": "Oxy Bleach",
+              "price": "₹149"
+            },
+            {
+              "name": "Fem Bleach",
+              "price": "₹249"
+            },
+            {
+              "name": "Anti-Pigmentation Bleach",
+              "price": "₹299"
+            },
+            {
+              "name": "Ozone Bleach",
+              "price": "₹199"
+            },
+            {
+              "name": "Aroma Bleach",
+              "price": "₹299"
+            },
+            {
+              "name": "Full Body Bleach",
+              "price": "₹1,999–₹2,499"
+            },
+            {
+              "name": "Body Polish",
+              "price": "₹2,999"
+            }
+          ]
+        },
+        {
+          "title": "Hands & Feet",
+          "items": [
+            {
+              "name": "Manicure",
+              "price": "₹499"
+            },
+            {
+              "name": "Pedicure",
+              "price": "₹499"
+            },
+            {
+              "name": "Nail Paint",
+              "price": "₹99"
+            },
+            {
+              "name": "D-Tan",
+              "price": "₹349"
+            },
+            {
+              "name": "Hand Scrub",
+              "price": "₹199"
+            },
+            {
+              "name": "Foot Scrub",
+              "price": "₹199"
+            }
+          ]
+        },
+        {
+          "title": "Flower Mask / Power Mask",
+          "items": [
+            {
+              "name": "Anti-Aging Mask",
+              "price": "₹449"
+            },
+            {
+              "name": "Skin Glow Mask",
+              "price": "₹499"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Prices ending with 99 or 49 follow the menu’s listed pricing."
+      ]
+    },
+    {
+      "id": "facials",
+      "eyebrow": "Glow your own way",
+      "title": "Facials & Clean-ups",
+      "description": "Choose a facial or a quick clean-up from the Fusion Aura menu.",
+      "icon": "✿",
+      "groups": [
+        {
+          "title": "Facials",
+          "columns": true,
+          "items": [
+            {
+              "name": "Korean Rice Water Facial",
+              "price": "₹1,499"
+            },
+            {
+              "name": "O3+ Whitening Facial",
+              "price": "₹1,999"
+            },
+            {
+              "name": "Diamond Facial",
+              "price": "₹799"
+            },
+            {
+              "name": "Fruit Facial",
+              "price": "₹499"
+            },
+            {
+              "name": "Pearl Facial",
+              "price": "₹799"
+            },
+            {
+              "name": "FYC Korean Facial",
+              "price": "₹1,999"
+            },
+            {
+              "name": "Hydra Facial",
+              "price": "₹2,599"
+            },
+            {
+              "name": "D-Tan Facial",
+              "price": "₹499"
+            },
+            {
+              "name": "Vitamin C Facial",
+              "price": "₹699"
+            },
+            {
+              "name": "Lotus Facial",
+              "price": "₹799"
+            },
+            {
+              "name": "Skin Whitening Facial",
+              "price": "₹999"
+            },
+            {
+              "name": "Red Wine Facial",
+              "price": "₹599"
+            }
+          ]
+        },
+        {
+          "title": "Clean-ups",
+          "items": [
+            {
+              "name": "Fruit Cleanup",
+              "price": "₹249"
+            },
+            {
+              "name": "Pearl Cleanup",
+              "price": "₹199"
+            },
+            {
+              "name": "O3+ Cleanup",
+              "price": "₹299"
+            },
+            {
+              "name": "O3+ Whitening Cleanup",
+              "price": "₹499"
+            },
+            {
+              "name": "Lotus Cleanup",
+              "price": "₹399"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "pre-wedding",
+      "eyebrow": "For the moments before the big day",
+      "title": "Pre-Wedding Services",
+      "description": "Full-day professional makeup with an optional hair styling artist.",
+      "icon": "♡",
+      "groups": [
+        {
+          "title": "Pricing per day",
+          "items": [
+            {
+              "name": "Full-Day Professional Makeup",
+              "detail": "Up to 12 hours · early morning to late night",
+              "price": "₹8,000"
+            },
+            {
+              "name": "Hair Styling Artist",
+              "detail": "Optional add-on",
+              "price": "₹2,000"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Personalized professional makeup with premium-quality products and camera-ready results.",
+        "Client covers travel and meals for the team. Accommodation is required for outstation or multi-day bookings.",
+        "50% advance confirms the booking; the advance is non-refundable. Timely coordination and respectful communication are expected.",
+        "Services may stop in unsafe situations; no refund applies in those cases."
+      ]
+    }
+  ]
+}
