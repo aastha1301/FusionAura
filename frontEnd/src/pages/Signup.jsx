@@ -15,7 +15,7 @@ function Signup() {
     e.preventDefault()
     setError("")
 
-    if (formData.password !== formData.confirmPassword) return setError("Passwords do not match.")
+    if (formData.password !== formData.confirmPassword) return setError("Passwords didnt match.")
     if (!/^\d{10}$/.test(formData.phone)) return setError("Phone number must be 10 digits.")
 
     try {
