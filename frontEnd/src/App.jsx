@@ -23,7 +23,6 @@ import ManageServices from "./pages/admin/ManageServices"
 import ManageBookings from "./pages/admin/ManageBookings"
 
 import { fetchReviews } from "./slices/reviewSlice"
-import { fetchMyBookings } from "./slices/bookingSlice"
 import { fetchServices } from "./slices/serviceSlice"
 
 function CustomerLayout({ children }) {
@@ -49,16 +48,11 @@ function ScrollManager() {
 
 function AppDataLoader() {
   const dispatch = useDispatch()
-  const token = useSelector((state) => state.auth.token)
 
   useEffect(() => {
     dispatch(fetchServices())
     dispatch(fetchReviews())
   }, [dispatch])
-
-  useEffect(() => {
-    if (token) dispatch(fetchMyBookings(token))
-  }, [dispatch, token])
 
   return null
 }

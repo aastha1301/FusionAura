@@ -141,7 +141,7 @@ function Booking() {
     <div className="mx-auto max-w-5xl">
       <div className="mb-7">
         <Link to="/services" className="text-sm text-[#f0a7bd] hover:text-white">← Back to services menu</Link>
-        <div className="mt-3 flex flex-wrap items-end justify-between gap-3"><div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#edca83]">Appointment request</p><h1 className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl">Book your visit</h1><p className="mt-2 text-sm text-zinc-400">Choose one service, or add more to create a combo.</p></div><span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs text-zinc-300">{selectedServices.length} of 5 selected</span></div>
+        <div className="mt-3 flex flex-wrap items-end justify-between gap-3"><div className="min-w-0"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#edca83]">Appointment request</p><h1 className="mt-2 text-3xl font-bold text-zinc-100 sm:text-4xl">Book your visit</h1><p className="mt-2 text-sm text-zinc-400">Choose one service, or add more to create a combo.</p></div><span className="shrink-0 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs text-zinc-300">{selectedServices.length} of 5 selected</span></div>
       </div>
 
       {error && <div role="alert" className="mb-5 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">{error}</div>}

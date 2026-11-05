@@ -67,12 +67,12 @@ function Contact() {
     <div className="bg-[#080709] min-h-screen">
 
       
-      <section className="py-16 text-center px-6">
+      <section className="px-4 py-12 text-center sm:px-6 sm:py-16">
         <p className="text-[#f06b91] uppercase tracking-widest text-sm">
           Get In Touch
         </p>
 
-        <h1 className="text-4xl font-bold mt-2">
+        <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
           Contact Fusion Aura
         </h1>
 
@@ -81,22 +81,22 @@ function Contact() {
           Send us a message and we will be happy to help.
         </p>
 
-        <div className="w-20 h-1 bg-[#080709]0 mx-auto mt-4 rounded"></div>
+        <div className="mx-auto mt-4 h-1 w-20 rounded bg-[#e85b83]"></div>
       </section>
 
 
       
-      <section className="max-w-6xl mx-auto px-6 pb-16">
-        <div className="grid md:grid-cols-2 gap-8">
+      <section className="mx-auto max-w-6xl px-4 pb-12 sm:px-6 sm:pb-16">
+        <div className="grid gap-5 lg:grid-cols-2 lg:gap-8">
 
           
-          <div className="bg-[#101014] rounded-2xl shadow-sm p-8">
+          <div className="rounded-2xl bg-[#101014] p-5 shadow-sm sm:p-8">
 
             <p className="text-[#f06b91] uppercase tracking-widest text-sm">
               Contact Information
             </p>
 
-            <h2 className="text-3xl font-bold mt-2">
+            <h2 className="mt-2 text-2xl font-bold sm:text-3xl">
               We'd Love To Hear From You
             </h2>
 
@@ -175,7 +175,7 @@ function Contact() {
 
 
           
-          <div className="bg-[#101014] rounded-2xl shadow-sm p-8">
+          <div className="rounded-2xl bg-[#101014] p-5 shadow-sm sm:p-8">
 
             <h2 className="text-2xl font-bold">
               Send Us A Message
@@ -284,7 +284,7 @@ function Contact() {
               
               <button
                 type="submit"
-                className="w-full bg-[#080709]0 text-white py-3 rounded-lg font-medium hover:bg-[#c9476d] transition"
+                className="w-full rounded-lg bg-[#e85b83] py-3 font-medium text-white transition hover:bg-[#c9476d]"
               >
                 Send Message
               </button>
@@ -297,10 +297,10 @@ function Contact() {
 
 
      
-      <section className="bg-[#101014] py-12">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="bg-[#101014] py-10 sm:py-12">
+        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
 
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-xl font-bold sm:text-2xl">
             Ready For Your Beauty Transformation? ✨
           </h2>
 

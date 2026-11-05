@@ -5,9 +5,9 @@ function Footer() {
     <footer className="bg-[#050506] text-white">
 
      
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid gap-8 sm:grid-cols-2 sm:gap-10 xl:grid-cols-4">
 
           
           <div>
@@ -140,7 +140,7 @@ function Footer() {
       
       <div className="border-t border-white/10">
 
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-center sm:px-6 md:flex-row md:text-left lg:px-8">
 
           <p className="text-zinc-500 text-sm">
             © 2026 Fusion Aura. All rights reserved.
@@ -148,7 +148,7 @@ function Footer() {
 
           <Link
             to="/services"
-            className="bg-[#080709]0 px-5 py-2 rounded-lg text-sm hover:bg-[#c9476d]"
+            className="rounded-lg bg-[#e85b83] px-5 py-2 text-sm text-white transition-colors hover:bg-[#c9476d]"
           >
             Browse Services & Book
           </Link>

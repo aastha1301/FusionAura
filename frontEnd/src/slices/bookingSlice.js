@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { apiRequest } from "../api"
+import { logoutAdmin, logoutUser, setAdminSession, setCustomerSession } from "./authSlice"
 
 export const fetchMyBookings = createAsyncThunk("bookings/mine", async (token) => apiRequest("/bookings/mine", {}, token))
 export const fetchAllBookings = createAsyncThunk("bookings/all", async (token) => apiRequest("/bookings", {}, token))
@@ -20,21 +21,55 @@ export const deleteBooking = createAsyncThunk("bookings/delete", async ({ id, to
 
 const bookingSlice = createSlice({
   name: "bookings",
-  initialState: { bookings: [], loading: false, error: "" },
+  initialState: { myBookings: [], allBookings: [], loadingMy: false, loadingAll: false, errorMy: "", errorAll: "", customerId: null, myRequestId: null },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMyBookings.pending, (state) => { state.loading = true })
-      .addCase(fetchMyBookings.fulfilled, (state, action) => { state.loading = false; state.bookings = action.payload })
-      .addCase(fetchMyBookings.rejected, (state, action) => { state.loading = false; state.error = action.error.message })
-      .addCase(fetchAllBookings.fulfilled, (state, action) => { state.bookings = action.payload })
-      .addCase(addBooking.fulfilled, (state, action) => { state.bookings.unshift(action.payload) })
+      .addCase(setCustomerSession, (state, action) => {
+        const nextCustomerId = action.payload.user?._id || action.payload.user?.id || null
+        if (String(state.customerId || "") !== String(nextCustomerId || "")) state.myBookings = []
+        state.customerId = nextCustomerId
+        state.loadingMy = false
+        state.errorMy = ""
+        state.myRequestId = null
+      })
+      .addCase(logoutUser, (state) => {
+        state.myBookings = []
+        state.customerId = null
+        state.loadingMy = false
+        state.errorMy = ""
+        state.myRequestId = null
+      })
+      .addCase(setAdminSession, (state) => { state.allBookings = [] })
+      .addCase(logoutAdmin, (state) => { state.allBookings = []; state.loadingAll = false; state.errorAll = "" })
+      .addCase(fetchMyBookings.pending, (state, action) => { state.loadingMy = true; state.errorMy = ""; state.myBookings = []; state.myRequestId = action.meta.requestId })
+      .addCase(fetchMyBookings.fulfilled, (state, action) => {
+        if (state.myRequestId !== action.meta.requestId) return
+        state.loadingMy = false
+        state.myRequestId = null
+        state.myBookings = action.payload
+      })
+      .addCase(fetchMyBookings.rejected, (state, action) => {
+        if (state.myRequestId !== action.meta.requestId) return
+        state.loadingMy = false
+        state.myRequestId = null
+        state.errorMy = action.error.message || "Could not load your bookings."
+      })
+      .addCase(fetchAllBookings.pending, (state) => { state.loadingAll = true; state.errorAll = "" })
+      .addCase(fetchAllBookings.fulfilled, (state, action) => { state.loadingAll = false; state.allBookings = action.payload })
+      .addCase(fetchAllBookings.rejected, (state, action) => { state.loadingAll = false; state.errorAll = action.error.message || "Could not load bookings." })
+      .addCase(addBooking.fulfilled, (state, action) => {
+        if (String(action.payload.user || "") === String(state.customerId || "")) {
+          state.myBookings = [action.payload, ...state.myBookings.filter((booking) => booking._id !== action.payload._id)]
+        }
+      })
       .addCase(updateBookingStatus.fulfilled, (state, action) => {
-        const index = state.bookings.findIndex((b) => b._id === action.payload._id)
-        if (index !== -1) state.bookings[index] = action.payload
+        const index = state.allBookings.findIndex((b) => b._id === action.payload._id)
+        if (index !== -1) state.allBookings[index] = action.payload
       })
       .addCase(deleteBooking.fulfilled, (state, action) => {
-        state.bookings = state.bookings.filter((b) => b._id !== action.payload)
+        state.allBookings = state.allBookings.filter((b) => b._id !== action.payload)
+        state.myBookings = state.myBookings.filter((b) => b._id !== action.payload)
       })
   }
 })

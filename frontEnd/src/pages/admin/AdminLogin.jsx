@@ -27,7 +27,7 @@ function AdminLogin() {
       {error && <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm p-3 rounded-lg mt-6">{error}</div>}
       <form onSubmit={handleSubmit} className="mt-6">
         <label className="block text-sm font-medium mb-2">Admin Email</label>
-        <input type="email" value={formData.email} onChange={e=>setFormData({...formData,email:e.target.value})} placeholder="admin@fusionaura.com" className="w-full bg-[#080709] border border-white/10 rounded-lg px-4 py-3" required />
+        <input type="email" value={formData.email} onChange={e=>setFormData({...formData,email:e.target.value})} placeholder="Enter your staff email" className="w-full bg-[#080709] border border-white/10 rounded-lg px-4 py-3" required />
         <label className="block text-sm font-medium mb-2 mt-5">Password</label>
         <input type="password" value={formData.password} onChange={e=>setFormData({...formData,password:e.target.value})} placeholder="Enter admin password" className="w-full bg-[#080709] border border-white/10 rounded-lg px-4 py-3" required />
         <button disabled={loading} className="w-full bg-[#e85b83] text-white py-3 rounded-lg mt-6 hover:bg-[#c9476d] disabled:opacity-60">{loading ? "Signing in..." : "Login as Admin"}</button>

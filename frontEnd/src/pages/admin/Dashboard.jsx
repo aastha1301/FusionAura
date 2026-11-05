@@ -7,7 +7,7 @@ import { fetchServices } from "../../slices/serviceSlice"
 function Dashboard() {
   const dispatch = useDispatch()
   const token = useSelector((state)=>state.auth.adminToken)
-  const bookings = useSelector((state)=>state.bookings.bookings)
+  const bookings = useSelector((state)=>state.bookings.allBookings)
   const services = useSelector((state)=>state.services.services)
   useEffect(()=>{ dispatch(fetchServices()); dispatch(fetchAllBookings(token)) },[dispatch,token])
   const serviceCount = services.length

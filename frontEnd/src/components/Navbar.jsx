@@ -40,7 +40,7 @@ function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden lg:flex items-center gap-1 rounded-full border border-white/[0.06] bg-black/20 p-1">
+        <div className="hidden items-center gap-1 rounded-full border border-white/[0.06] bg-black/20 p-1 xl:flex">
           <Link to="/" className={linkClass("/")}>Home</Link>
           <Link to="/services" className={linkClass("/services")}>Services</Link>
           <Link to="/about" className={linkClass("/about")}>About Us</Link>
@@ -95,12 +95,13 @@ function Navbar() {
         )}
       </div>
 
-      <div className="hidden sm:flex lg:hidden justify-start gap-1.5 px-4 pb-3 overflow-x-auto scrollbar-hide">
+      <div className="hidden justify-start gap-1.5 overflow-x-auto px-4 pb-3 scrollbar-hide sm:flex xl:hidden">
         <Link to="/" className={linkClass("/")}>Home</Link>
         <Link to="/services" className={linkClass("/services")}>Services</Link>
         <Link to="/about" className={linkClass("/about")}>About</Link>
         <Link to="/reviews" className={linkClass("/reviews")}>Reviews</Link>
         <Link to="/contact" className={linkClass("/contact")}>Contact</Link>
+        {user && <Link to="/my-bookings" className={linkClass("/my-bookings")}>My Bookings</Link>}
       </div>
     </nav>
   )

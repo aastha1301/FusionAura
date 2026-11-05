@@ -4,12 +4,12 @@ function About() {
 
      
       <section className="bg-[#080709] py-16">
-        <div className="max-w-6xl mx-auto px-6 text-center">
+        <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
           <p className="text-[#f06b91] uppercase tracking-widest text-sm">
             About Fusion Aura
           </p>
 
-          <h1 className="text-4xl font-bold mt-2">
+          <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
             Beauty That Makes You Feel Special
           </h1>
 
@@ -19,21 +19,21 @@ function About() {
             create a comfortable and beautiful experience.
           </p>
 
-          <div className="w-20 h-1 bg-[#080709]0 mx-auto mt-5 rounded"></div>
+          <div className="mx-auto mt-5 h-1 w-20 rounded bg-[#e85b83]"></div>
         </div>
       </section>
 
 
      
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
 
           
           <div>
             <img
               src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=80"
               alt="Fusion Aura Salon"
-              className="w-full h-[280px] sm:h-[360px] md:h-[420px] object-cover rounded-2xl shadow-[0_18px_50px_rgba(0,0,0,0.45)]"
+              className="h-[240px] w-full rounded-2xl object-cover sm:h-[360px] lg:h-[420px]"
             />
           </div>
 
@@ -72,8 +72,8 @@ function About() {
 
 
    
-      <section className="bg-[#080709] py-16">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="bg-[#080709] py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
           <div className="text-center mb-10">
             <p className="text-[#f06b91] uppercase tracking-widest text-sm">
@@ -133,9 +133,9 @@ function About() {
 
 
       
-      <section className="py-16">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid sm:grid-cols-3 gap-6 text-center">
+      <section className="py-12 sm:py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="grid gap-6 text-center md:grid-cols-3">
 
             <div>
               <h2 className="text-4xl font-bold text-[#f06b91]">8+</h2>

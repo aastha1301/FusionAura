@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchMyBookings } from "../slices/bookingSlice"
 
 function MyBookings() {
+  const dispatch = useDispatch()
   const user = useSelector((state) => state.auth.user)
-  const bookings = useSelector((state) => state.bookings.bookings)
+  const token = useSelector((state) => state.auth.token)
+  const { myBookings, loadingMy, errorMy } = useSelector((state) => state.bookings)
+  const userId = user?._id || user?.id
+  const bookings = myBookings.filter((booking) => String(booking.user?._id || booking.user || "") === String(userId || ""))
+
+  useEffect(() => {
+    if (!user || !token) return undefined
+    const request = dispatch(fetchMyBookings(token))
+    return () => request.abort()
+  }, [dispatch, token, userId])
 
   if (!user) {
     return <main className="min-h-screen bg-[#080607] flex items-center justify-center px-6">
@@ -18,10 +30,11 @@ function MyBookings() {
   return <main className="min-h-screen bg-[#080607] py-12 px-4 sm:px-6">
     <div className="max-w-5xl mx-auto">
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-white">My Bookings</h1>
+        <h1 className="text-3xl font-bold text-white sm:text-4xl">My Bookings</h1>
         <p className="text-gray-400 mt-3">View your appointment details and status.</p>
       </div>
-      {bookings.length === 0 ? <div className="bg-[#111013] border border-[#302128] rounded-2xl p-8 sm:p-10 text-center">
+      {errorMy && <div role="alert" className="mb-5 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">{errorMy}</div>}
+      {loadingMy ? <div role="status" className="rounded-2xl border border-white/10 bg-[#111013] p-8 text-center text-sm text-zinc-300">Loading your bookings…</div> : bookings.length === 0 ? <div className="bg-[#111013] border border-[#302128] rounded-2xl p-8 sm:p-10 text-center">
         <div className="text-5xl mb-4">📅</div>
         <h2 className="text-2xl font-semibold text-white">No Bookings Yet</h2>
         <p className="text-gray-400 mt-2 mb-6">Choose a service from the menu to get started.</p>

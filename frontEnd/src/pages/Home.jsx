@@ -31,9 +31,9 @@ function Home() {
     <div className="bg-[#080709]">
 
      
-      <section className="min-h-[70vh] flex items-center">
+      <section className="flex min-h-[70vh] items-center">
 
-        <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:px-8">
 
           <div>
 
@@ -41,7 +41,7 @@ function Home() {
               ✨ Beauty • Style • Confidence
             </p>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-zinc-100 leading-tight">
+            <h1 className="text-4xl font-bold leading-tight text-zinc-100 sm:text-5xl xl:text-6xl">
               Your Beauty,
               <span className="text-[#f06b91]">
                 {" "}Our Passion
@@ -58,7 +58,7 @@ function Home() {
 
               <Link
                 to="/services"
-                className="bg-[#d746c] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#d9476d]"
+                className="rounded-lg bg-[#e85b83] px-6 py-3 font-medium text-white transition-colors hover:bg-[#d9476d]"
               >
                 Book Appointment
               </Link>
@@ -90,7 +90,7 @@ function Home() {
      
       <section className="bg-[#101014] py-10">
 
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-6 text-center">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 text-center sm:gap-6 sm:px-6 lg:grid-cols-4 lg:px-8">
 
           <div>
             <div className="text-3xl">💄</div>
@@ -138,7 +138,7 @@ function Home() {
 
 
       
-      <section className="py-16 px-6">
+      <section className="px-4 py-12 sm:px-6 sm:py-16">
 
         <div className="max-w-7xl mx-auto">
 
@@ -155,7 +155,7 @@ function Home() {
           </div>
 
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
             {featuredServices.map((menu, index) => (
               <Link key={menu.id} to={`/services#${menu.id}`} className="group rounded-2xl border border-[#c9a765]/25 bg-[#100e0d] p-6 transition hover:-translate-y-1 hover:border-[#d8b86e]/60">
                 <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#d9b76f]/40 text-2xl text-[#edca83]">{menu.icon}</span>
@@ -188,7 +188,7 @@ function Home() {
 
 
       
-      <section className="bg-[#101014] py-16 px-6">
+      <section className="bg-[#101014] px-4 py-12 sm:px-6 sm:py-16">
 
         <div className="max-w-7xl mx-auto">
 
@@ -205,7 +205,7 @@ function Home() {
           </div>
 
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
 
             {featuredReviews.map((review, index) => (
 
@@ -238,9 +238,9 @@ function Home() {
 
 
       {/* CTA */}
-      <section className="py-16 px-6">
+      <section className="px-4 py-12 sm:px-6 sm:py-16">
 
-        <div className="max-w-5xl mx-auto bg-[#080709]0 rounded-3xl p-10 text-center text-white">
+        <div className="mx-auto max-w-5xl rounded-3xl bg-[#101014] p-6 text-center text-white sm:p-10">
 
           <h2 className="text-3xl md:text-4xl font-bold">
             Ready for Your New Look?
@@ -252,7 +252,7 @@ function Home() {
 
           <Link
             to="/services"
-            className="inline-block mt-7 bg-[#101014] text-[#f06b91] px-7 py-3 rounded-lg font-medium hover:bg-[#080709]"
+            className="mt-7 inline-block rounded-lg bg-[#e85b83] px-7 py-3 font-medium text-white transition-colors hover:bg-[#d9476d]"
           >
             Browse Services & Book
           </Link>

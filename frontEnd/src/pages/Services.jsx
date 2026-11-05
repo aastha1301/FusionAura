@@ -129,10 +129,10 @@ function MenuSection({ menu, index }) {
     <section id={menu.id} className="scroll-mt-28 overflow-hidden rounded-[1.75rem] border border-[#c9a765]/35 bg-[#100e0d] shadow-[0_20px_70px_rgba(0,0,0,0.3)]">
       <div className="relative border-b border-[#c9a765]/20 px-6 py-7 sm:px-9 sm:py-9">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(195,148,70,0.12),transparent_55%)]" />
-        <div className="relative flex items-start gap-4">
+        <div className="relative flex min-w-0 items-start gap-3 sm:gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#d9b76f]/50 text-2xl text-[#edca83]">{menu.icon}</div>
-          <div>
-            <p className="text-[0.68rem] font-medium uppercase tracking-[0.25em] text-[#d8b86e]">Menu 0{index + 1} · {menu.eyebrow}</p>
+          <div className="min-w-0 flex-1">
+            <p className="break-words text-[0.62rem] font-medium uppercase tracking-[0.16em] text-[#d8b86e] sm:text-[0.68rem] sm:tracking-[0.25em]">Menu 0{index + 1} · {menu.eyebrow}</p>
             <h2 className="mt-2 font-serif text-3xl text-[#fff1cc] sm:text-4xl">{menu.title}</h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">{menu.description}</p>
           </div>
