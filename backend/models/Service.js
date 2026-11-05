@@ -14,6 +14,8 @@ const serviceSchema = new mongoose.Schema(
       default: "Professional beauty and salon service.",
       trim: true
     },
+    includes: { type: [String], default: [] },
+    optionalAddons: { type: [String], default: [] },
     image: { type: String, default: "" }
   },
   { timestamps: true }

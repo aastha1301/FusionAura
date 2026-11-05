@@ -1,11 +1,13 @@
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { setCustomerSession } from "../slices/authSlice"
 import { apiRequest } from "../api"
 
 function Login() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const returnTo = location.state?.from || "/"
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({ email: "", password: "" })
   const [error, setError] = useState("")
@@ -23,7 +25,7 @@ function Login() {
         body: JSON.stringify(formData)
       })
       dispatch(setCustomerSession(result))
-      navigate("/")
+      navigate(returnTo, { replace: true })
     } catch (err) {
       setError(err.message)
     } finally {
@@ -53,7 +55,7 @@ function Login() {
         </form>
 
         <p className="text-center text-sm text-zinc-500 mt-6">
-          Don't have an account? <Link to="/signup" className="text-[#f06b91] font-medium hover:underline">Signup</Link>
+          Don't have an account? <Link to="/signup" state={{ from: location.state?.from }} className="text-[#f06b91] font-medium hover:underline">Signup</Link>
         </p>
       </div>
     </div>

@@ -12,6 +12,11 @@ function parsePrice(value) {
   return match ? Number(match[0].replace(/,/g, "")) : NaN
 }
 
+function parseIncludes(value) {
+  const lines = Array.isArray(value) ? value : String(value || "").split(/\r?\n/)
+  return [...new Set(lines.map((item) => String(item).trim()).filter(Boolean))].slice(0, 20)
+}
+
 router.get("/", async (_req, res) => {
   try {
     const services = await Service.find().sort({ createdAt: 1 })
@@ -23,7 +28,7 @@ router.get("/", async (_req, res) => {
 
 router.post("/", requireAdmin, upload.single("image"), async (req, res) => {
   try {
-    const { menuId, menuTitle, groupTitle, name, priceLabel, price, time, description } = req.body
+    const { menuId, menuTitle, groupTitle, name, priceLabel, price, time, description, includes, optionalAddons } = req.body
     const numericPrice = parsePrice(priceLabel || price)
     if (!menuId || !menuTitle || !groupTitle || !name || !priceLabel || !Number.isFinite(numericPrice)) {
       return res.status(400).json({ message: "Menu, category, service name and a valid price are required." })
@@ -39,6 +44,8 @@ router.post("/", requireAdmin, upload.single("image"), async (req, res) => {
       priceLabel: priceLabel.trim(),
       time: time?.trim() || "As arranged",
       description: description?.trim() || "Professional beauty and salon service.",
+      includes: parseIncludes(includes),
+      optionalAddons: parseIncludes(optionalAddons),
       image
     })
     res.status(201).json(service)
@@ -71,6 +78,8 @@ router.put("/:id", requireAdmin, upload.single("image"), async (req, res) => {
     }
     service.time = req.body.time?.trim() || service.time || "As arranged"
     service.description = req.body.description?.trim() || service.description
+    if (req.body.includes !== undefined) service.includes = parseIncludes(req.body.includes)
+    if (req.body.optionalAddons !== undefined) service.optionalAddons = parseIncludes(req.body.optionalAddons)
 
     if (req.file) {
       service.image = `/uploads/${req.file.filename}`

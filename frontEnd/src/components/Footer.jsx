@@ -147,10 +147,10 @@ function Footer() {
           </p>
 
           <Link
-            to="/booking"
+            to="/services"
             className="bg-[#080709]0 px-5 py-2 rounded-lg text-sm hover:bg-[#c9476d]"
           >
-            Book Appointment
+            Browse Services & Book
           </Link>
 
         </div>

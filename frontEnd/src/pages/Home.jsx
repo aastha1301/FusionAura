@@ -57,7 +57,7 @@ function Home() {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8">
 
               <Link
-                to="/booking"
+                to="/services"
                 className="bg-[#d746c] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#d9476d]"
               >
                 Book Appointment
@@ -251,10 +251,10 @@ function Home() {
           </p>
 
           <Link
-            to="/booking"
+            to="/services"
             className="inline-block mt-7 bg-[#101014] text-[#f06b91] px-7 py-3 rounded-lg font-medium hover:bg-[#080709]"
           >
-            Book Appointment
+            Browse Services & Book
           </Link>
 
         </div>

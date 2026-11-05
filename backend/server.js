@@ -68,6 +68,8 @@ async function seedData() {
           priceLabel: item.price,
           time: item.detail || "As arranged",
           description: menu.description,
+          includes: item.includes || [],
+          optionalAddons: item.optionalAddons || [],
           image: ""
         }
       }))

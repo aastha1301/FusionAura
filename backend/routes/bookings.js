@@ -3,8 +3,19 @@ const mongoose = require("mongoose")
 const Booking = require("../models/Booking")
 const Service = require("../models/Service")
 const { requireCustomer, requireAdmin } = require("../middleware/auth")
+const serviceMenuCatalog = require("../../frontEnd/src/data/serviceMenus.json")
 
 const router = express.Router()
+
+function catalogItem(menuId, groupTitle, serviceName) {
+  const menu = serviceMenuCatalog.menus.find((entry) => entry.id === menuId)
+  const group = menu?.groups.find((entry) => entry.title === groupTitle)
+  return group?.items.find((entry) => entry.name === serviceName) || null
+}
+
+function catalogIncludes(menuId, groupTitle, serviceName) {
+  return catalogItem(menuId, groupTitle, serviceName)?.includes || []
+}
 
 router.get("/mine", requireCustomer, async (req, res) => {
   try {
@@ -17,7 +28,7 @@ router.get("/mine", requireCustomer, async (req, res) => {
 
 router.post("/", requireCustomer, async (req, res) => {
   try {
-    const { name, phone, service, serviceId, menuId, groupTitle, serviceName, date, time } = req.body
+    const { name, phone, service, serviceId, menuId, groupTitle, serviceName, addOns = [], date, time } = req.body
     const cleanName = typeof name === "string" ? name.trim().replace(/\s+/g, " ") : ""
     const cleanPhone = typeof phone === "string" ? phone.trim() : ""
     if (cleanName.length > 30 || !/^[\p{L}\p{M}]+(?: [\p{L}\p{M}]+)*$/u.test(cleanName)) {
@@ -49,6 +60,22 @@ router.post("/", requireCustomer, async (req, res) => {
     }
     if (!serviceDoc) return res.status(400).json({ message: "That service is no longer available. Please select another service." })
 
+    if (!Array.isArray(addOns) || addOns.length > 4) return res.status(400).json({ message: "A booking can include up to five services." })
+    const addOnDocs = []
+    for (const requested of addOns) {
+      let addOnDoc = null
+      if (requested?.serviceId) {
+        if (!mongoose.isValidObjectId(requested.serviceId)) return res.status(400).json({ message: "Choose a valid optional add-on." })
+        addOnDoc = await Service.findById(requested.serviceId)
+      } else if (requested?.menuId && requested?.groupTitle && requested?.serviceName) {
+        addOnDoc = await Service.findOne({ menuId: requested.menuId, groupTitle: requested.groupTitle, name: requested.serviceName })
+      }
+      if (!addOnDoc || addOnDoc._id.equals(serviceDoc._id)) {
+        return res.status(400).json({ message: "Choose a different service for your combo." })
+      }
+      if (!addOnDocs.some((item) => item._id.equals(addOnDoc._id))) addOnDocs.push(addOnDoc)
+    }
+
     const clash = await Booking.findOne({
       date,
       time,
@@ -62,7 +89,9 @@ router.post("/", requireCustomer, async (req, res) => {
       phone: cleanPhone,
       email: req.user.email,
       serviceId: serviceDoc._id,
-      service: [serviceDoc.menuTitle, serviceDoc.groupTitle, serviceDoc.name].filter(Boolean).join(" · "),
+      service: `${[serviceDoc.menuTitle, serviceDoc.groupTitle, serviceDoc.name].filter(Boolean).join(" · ")}${addOnDocs.map((item) => ` + ${item.name}`).join("")}`,
+      packageIncludes: serviceDoc.includes?.length ? serviceDoc.includes : catalogIncludes(serviceDoc.menuId, serviceDoc.groupTitle, serviceDoc.name),
+      addons: addOnDocs.map((item) => ({ serviceId: item._id, name: item.name, priceLabel: item.priceLabel, includes: item.includes || catalogIncludes(item.menuId, item.groupTitle, item.name) })),
       date,
       time,
       status: "Pending"

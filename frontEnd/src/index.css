@@ -92,3 +92,234 @@ button, a {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Fusion Aura glassmorphism refresh */
+:root {
+  color-scheme: dark;
+  --glass-bg: rgba(31, 23, 31, 0.62);
+  --glass-bg-strong: rgba(39, 27, 36, 0.78);
+  --glass-border: rgba(255, 221, 231, 0.16);
+  --glass-highlight: rgba(255, 244, 248, 0.22);
+  --glass-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  --rose: #f08aaa;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 12% 4%, rgba(225, 115, 159, 0.24), transparent 34rem),
+    radial-gradient(ellipse at 88% 22%, rgba(202, 159, 100, 0.15), transparent 32rem),
+    radial-gradient(ellipse at 54% 78%, rgba(116, 77, 113, 0.2), transparent 38rem),
+    linear-gradient(145deg, #100c14 0%, #17101a 48%, #0c0a10 100%);
+  background-attachment: fixed;
+}
+
+/* Replace opaque page shells with the shared luminous backdrop. */
+:is([class*="bg-[#080709]"], [class*="bg-[#080706]"], [class*="bg-[#080607]"], [class*="bg-[#050506]"]) {
+  background-color: transparent !important;
+}
+
+/* Main content panels, forms, catalog cards, and admin work surfaces. */
+:is([class*="bg-[#101014]"], [class*="bg-[#1b1015]"], [class*="bg-[#100e0d]"], [class*="bg-[#111013]"]) {
+  background: linear-gradient(145deg, rgba(255, 247, 250, 0.105), rgba(255, 247, 250, 0.035)), var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  backdrop-filter: blur(22px) saturate(145%);
+}
+
+/* Persistent navigation and dropdown surfaces. */
+nav.sticky,
+header.sticky {
+  background: rgba(18, 13, 21, 0.72) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255,255,255,.12);
+  -webkit-backdrop-filter: blur(24px) saturate(155%);
+  backdrop-filter: blur(24px) saturate(155%);
+}
+
+/* Give existing bordered content blocks a consistent glass edge. */
+:is([class*="border-white/10"], [class*="border-white/15"], [class*="border-white/[0.06]"], [class*="border-[#c9a765]/35"], [class*="border-[#c9a765]/25"]) {
+  border-color: var(--glass-border) !important;
+}
+
+/* Translucent secondary blocks used for notes, navigation groups, and summaries. */
+:is([class*="bg-black/20"], [class*="bg-white/5"], [class*="bg-white/[0.03]"], [class*="bg-white/[0.05]"], [class*="bg-white/[0.07]"]) {
+  background-color: rgba(255, 245, 249, 0.055) !important;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+/* Softer glass buttons and clearer keyboard focus. */
+a, button {
+  transition-timing-function: cubic-bezier(.2, .75, .25, 1);
+}
+button:focus-visible, a:focus-visible {
+  outline: 2px solid rgba(255, 191, 211, .9);
+  outline-offset: 3px;
+}
+input, textarea, select {
+  background-color: rgba(12, 10, 16, .48) !important;
+  border-color: rgba(255, 225, 235, .18) !important;
+  color: #fff7fa;
+}
+input::placeholder, textarea::placeholder { color: rgba(239, 220, 229, .52); }
+
+/* More dimensional service imagery and restrained hover lift. */
+img.rounded-3xl, img.rounded-2xl { box-shadow: 0 24px 65px rgba(0,0,0,.38); }
+[class*="shadow-[0_15px_40px"] { box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,.12); }
+
+footer {
+  background: rgba(15, 11, 18, .68) !important;
+  border-top: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main section[class*="min-h-screen"] { animation: glass-rise .55s ease both; }
+  @keyframes glass-rise {
+    from { opacity: .75; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@media (max-width: 640px) {
+  body { background-attachment: scroll; }
+  :is([class*="bg-[#101014]"], [class*="bg-[#1b1015]"], [class*="bg-[#100e0d]"], [class*="bg-[#111013]"]) {
+    -webkit-backdrop-filter: blur(16px) saturate(135%);
+    backdrop-filter: blur(16px) saturate(135%);
+  }
+}
+
+/* Melted glass: soft liquid light, rounded pools, and reflective edges. */
+:root {
+  --melt-rose: rgba(245, 157, 191, .24);
+  --melt-pearl: rgba(255, 242, 248, .19);
+  --melt-champagne: rgba(235, 201, 143, .16);
+  --melt-violet: rgba(163, 122, 179, .18);
+  --melt-edge: rgba(255, 235, 244, .22);
+  --melt-surface: rgba(36, 25, 40, .57);
+}
+
+body {
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 15% 8%, rgba(218, 116, 164, .23), transparent 36rem),
+    radial-gradient(ellipse at 86% 16%, rgba(231, 194, 135, .16), transparent 32rem),
+    radial-gradient(ellipse at 55% 62%, rgba(111, 73, 126, .24), transparent 42rem),
+    linear-gradient(145deg, #100b15 0%, #1d1421 48%, #0b0910 100%);
+  background-attachment: fixed;
+}
+
+body::before {
+  position: fixed;
+  z-index: -1;
+  inset: -12%;
+  content: "";
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 24% 20%, var(--melt-rose), transparent 25%),
+    radial-gradient(ellipse at 75% 28%, var(--melt-champagne), transparent 22%),
+    radial-gradient(ellipse at 55% 77%, var(--melt-violet), transparent 27%);
+  filter: blur(58px) saturate(125%);
+  opacity: .85;
+  animation: liquid-drift 24s ease-in-out infinite alternate;
+}
+
+@keyframes liquid-drift {
+  from { transform: translate3d(-1%, -1%, 0) scale(1); }
+  to { transform: translate3d(1.5%, 1%, 0) scale(1.05); }
+}
+
+/* The main cards read like thick, softly rounded glass with a pearly meniscus. */
+:is([class*="bg-[#101014]"], [class*="bg-[#1b1015]"], [class*="bg-[#100e0d]"], [class*="bg-[#111013]"]) {
+  position: relative;
+  border: 1px solid var(--melt-edge) !important;
+  border-radius: 28px !important;
+  background:
+    radial-gradient(ellipse at 8% 0%, rgba(255, 239, 247, .14), transparent 44%),
+    radial-gradient(ellipse at 100% 100%, rgba(220, 170, 203, .07), transparent 42%),
+    linear-gradient(145deg, rgba(255, 255, 255, .095), rgba(255, 255, 255, .025) 48%, rgba(236, 190, 220, .045)),
+    var(--melt-surface) !important;
+  box-shadow:
+    0 24px 68px rgba(0, 0, 0, .34),
+    0 2px 1px rgba(255, 255, 255, .12) inset,
+    1px 0 0 rgba(255, 255, 255, .08) inset,
+    0 -1px 0 rgba(196, 146, 186, .1) inset;
+  -webkit-backdrop-filter: blur(28px) saturate(155%);
+  backdrop-filter: blur(28px) saturate(155%);
+}
+
+/* Menu panels and service cards get a gentle liquid lift on hover. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :is([class*="bg-[#101014]"], [class*="bg-[#1b1015]"], [class*="bg-[#100e0d]"], [class*="bg-[#111013]"]):hover {
+    border-color: rgba(255, 231, 241, .3) !important;
+    box-shadow:
+      0 30px 78px rgba(0, 0, 0, .4),
+      0 2px 1px rgba(255, 255, 255, .17) inset,
+      1px 0 0 rgba(255, 255, 255, .1) inset;
+  }
+}
+
+nav.sticky,
+header.sticky {
+  border-bottom-color: rgba(255, 230, 241, .2) !important;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(245, 157, 191, .12), transparent 50%),
+    linear-gradient(110deg, rgba(32, 22, 37, .88), rgba(19, 15, 26, .78)) !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .3), 0 1px 0 rgba(255,255,255,.1) inset;
+  -webkit-backdrop-filter: blur(30px) saturate(165%);
+  backdrop-filter: blur(30px) saturate(165%);
+}
+
+/* Pink and champagne actions have a glossy edge instead of a flat fill. */
+:is(button, a)[class*="bg-[#e85b83]"],
+:is(button, a)[class*="from-[#e85b83]"] {
+  border: 1px solid rgba(255, 235, 244, .25);
+  box-shadow: 0 12px 28px rgba(212, 89, 134, .2), 0 1px 0 rgba(255,255,255,.28) inset;
+}
+
+:is(button, a)[class*="bg-[#d6b16d]"] {
+  border: 1px solid rgba(255, 245, 216, .28);
+  box-shadow: 0 10px 26px rgba(183, 139, 66, .16), 0 1px 0 rgba(255,255,255,.3) inset;
+}
+
+:is(input, textarea, select) {
+  border-radius: 14px !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.015)),
+    rgba(15, 11, 20, .58) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.07) inset, 0 8px 20px rgba(0,0,0,.12);
+}
+
+:is(input, textarea, select):focus {
+  border-color: rgba(255, 192, 213, .6) !important;
+  box-shadow: 0 0 0 3px rgba(232, 91, 131, .14), 0 1px 0 rgba(255,255,255,.12) inset;
+}
+
+img.rounded-3xl, img.rounded-2xl {
+  border: 1px solid rgba(255, 240, 246, .14);
+  box-shadow: 0 24px 65px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.2) inset;
+}
+
+footer {
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(229, 146, 181, .11), transparent 45%),
+    rgba(19, 13, 23, .78) !important;
+  border-top-color: rgba(255, 232, 241, .17) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(150%);
+  backdrop-filter: blur(26px) saturate(150%);
+}
+
+@media (max-width: 640px) {
+  body { background-attachment: scroll; }
+  :is([class*="bg-[#101014]"], [class*="bg-[#1b1015]"], [class*="bg-[#100e0d]"], [class*="bg-[#111013]"]) {
+    border-radius: 22px !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    backdrop-filter: blur(20px) saturate(140%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+}

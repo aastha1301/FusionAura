@@ -1,11 +1,13 @@
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { setCustomerSession } from "../slices/authSlice"
 import { apiRequest } from "../api"
 
 function Signup() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const returnTo = location.state?.from || "/"
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", password: "", confirmPassword: "" })
   const [error, setError] = useState("")
@@ -14,6 +16,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
+
 
     if (formData.password !== formData.confirmPassword) return setError("Passwords didnt match.")
     if (!/^\d{10}$/.test(formData.phone)) return setError("Phone number must be 10 digits.")
@@ -30,7 +33,7 @@ function Signup() {
         })
       })
       dispatch(setCustomerSession(result))
-      navigate("/")
+      navigate(returnTo, { replace: true })
     } catch (err) {
       setError(err.message)
     } finally {
@@ -68,7 +71,7 @@ function Signup() {
             {loading ? "Creating account..." : "Create Account"}
           </button>
         </form>
-        <p className="text-center text-sm text-zinc-500 mt-6">Already have an account? <Link to="/login" className="text-[#f06b91] font-medium hover:underline">Login</Link></p>
+        <p className="text-center text-sm text-zinc-500 mt-6">Already have an account? <Link to="/login" state={{ from: location.state?.from }} className="text-[#f06b91] font-medium hover:underline">Login</Link></p>
       </div>
     </div>
   )

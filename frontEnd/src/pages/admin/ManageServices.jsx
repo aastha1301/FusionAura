@@ -13,6 +13,8 @@ const emptyForm = {
   priceLabel: "",
   time: "As arranged",
   description: "",
+  includes: "",
+  optionalAddons: "",
 }
 
 function ManageServices() {
@@ -51,6 +53,8 @@ function ManageServices() {
     data.append("priceLabel", form.priceLabel.trim())
     data.append("time", form.time.trim() || "As arranged")
     data.append("description", form.description.trim() || selected.description)
+    data.append("includes", form.includes)
+    data.append("optionalAddons", form.optionalAddons)
 
     setSaving(true)
     try {
@@ -81,6 +85,8 @@ function ManageServices() {
       priceLabel: service.priceLabel || `₹${service.price}`,
       time: service.time || "As arranged",
       description: service.description || "",
+      includes: (service.includes || []).join("\n"),
+      optionalAddons: (service.optionalAddons || []).join("\n"),
     })
     setError("")
     setMessage("")
@@ -159,6 +165,12 @@ function ManageServices() {
                 </label>
                 <label className="text-sm text-zinc-300">Short description
                   <input value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} placeholder="Optional" className="mt-2 w-full rounded-xl border border-white/10 bg-[#080709] px-4 py-3 text-zinc-100" />
+                </label>
+                <label className="text-sm text-zinc-300 sm:col-span-2">What’s included <span className="text-zinc-500">(one item per line, for packages)</span>
+                  <textarea value={form.includes} onChange={(event) => setForm({ ...form, includes: event.target.value })} rows={3} placeholder={"Hair styling\nDupatta draping\nLashes"} className="mt-2 w-full resize-y rounded-xl border border-white/10 bg-[#080709] px-4 py-3 text-zinc-100" />
+                </label>
+                <label className="text-sm text-zinc-300 sm:col-span-2">Optional bookable add-ons <span className="text-zinc-500">(match a service name in this menu, one per line)</span>
+                  <textarea value={form.optionalAddons} onChange={(event) => setForm({ ...form, optionalAddons: event.target.value })} rows={2} placeholder="Hair Styling Artist" className="mt-2 w-full resize-y rounded-xl border border-white/10 bg-[#080709] px-4 py-3 text-zinc-100" />
                 </label>
               </div>
             </details>

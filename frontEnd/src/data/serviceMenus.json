@@ -12,11 +12,13 @@
           "items": [
             {
               "name": "Normal Makeup",
-              "price": "₹2,000"
+              "price": "₹2,000",
+              "includes": ["Forever 52 makeup products", "Hairdo", "Basic lashes", "Dupatta draping"]
             },
             {
               "name": "HD Makeup",
-              "price": "₹4,000"
+              "price": "₹4,000",
+              "includes": ["High-definition makeup"]
             }
           ]
         },
@@ -25,11 +27,13 @@
           "items": [
             {
               "name": "Normal Makeup",
-              "price": "₹5,000"
+              "price": "₹5,000",
+              "includes": ["Forever 52 makeup products", "Hairdo", "Basic lashes", "Dupatta draping"]
             },
             {
               "name": "Premium HD Makeup",
-              "price": "₹8,000"
+              "price": "₹8,000",
+              "includes": ["Contouring", "High-definition makeup", "Premium products", "Hairdo", "Faux mink reusable lashes", "Lenses", "Dupatta draping"]
             }
           ]
         },
@@ -38,11 +42,13 @@
           "items": [
             {
               "name": "Normal Makeup",
-              "price": "₹10,000"
+              "price": "₹10,000",
+              "includes": ["Forever 52 makeup products", "Hairdo", "Basic lashes", "Dupatta draping"]
             },
             {
               "name": "Premium HD Makeup",
-              "price": "₹15,000"
+              "price": "₹15,000",
+              "includes": ["Contouring", "High-definition makeup", "Premium products", "Hairdo", "Faux mink reusable lashes", "Lenses", "Dupatta draping"]
             }
           ]
         },
@@ -51,11 +57,13 @@
           "items": [
             {
               "name": "Normal Makeup",
-              "price": "₹20,000"
+              "price": "₹20,000",
+              "includes": ["Forever 52 makeup products", "Hairdo", "Basic lashes", "Dupatta draping"]
             },
             {
               "name": "Premium HD Makeup",
-              "price": "₹25,000"
+              "price": "₹25,000",
+              "includes": ["Contouring", "High-definition makeup", "Premium products", "Hairdo", "Faux mink reusable lashes", "Lenses", "Dupatta draping"]
             }
           ]
         }
@@ -259,7 +267,9 @@
             {
               "name": "Full-Day Professional Makeup",
               "detail": "Up to 12 hours · early morning to late night",
-              "price": "₹8,000"
+              "price": "₹8,000",
+              "includes": ["Personalized professional makeup", "Premium-quality products", "Camera-ready finish", "Up to 12 hours of service"],
+              "optionalAddons": ["Hair Styling Artist"]
             },
             {
               "name": "Hair Styling Artist",

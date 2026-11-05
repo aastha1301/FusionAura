@@ -56,7 +56,7 @@ function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/booking" className="rounded-full bg-gradient-to-r from-[#e85b83] to-[#f39ab3] px-4 py-2 text-sm font-semibold text-white shadow-[0_5px_20px_rgba(232,91,131,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(232,91,131,0.3)]">Book Now</Link>
+              <Link to="/services" className="rounded-full bg-gradient-to-r from-[#e85b83] to-[#f39ab3] px-4 py-2 text-sm font-semibold text-white shadow-[0_5px_20px_rgba(232,91,131,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(232,91,131,0.3)]">Choose a Service</Link>
               <Link to="/my-bookings" className={`hidden xl:block ${linkClass("/my-bookings")}`}>My Bookings</Link>
               <span className="hidden 2xl:block text-sm text-zinc-300 ml-1">Hi, {user.name}</span>
               <button onClick={handleLogout} className="rounded-full border border-white/15 px-4 py-2 text-sm text-zinc-200 transition-all duration-300 hover:border-[#e85b83]/70 hover:text-[#f06b91]">Logout</button>
@@ -88,7 +88,7 @@ function Navbar() {
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-2 pt-2">
-            <Link onClick={closeMenu} to="/booking" className="rounded-xl bg-gradient-to-r from-[#e85b83] to-[#f39ab3] px-3 py-2.5 text-center text-sm font-semibold text-white transition-transform hover:scale-[1.02]">Book Now</Link>
+            <Link onClick={closeMenu} to="/services" className="rounded-xl bg-gradient-to-r from-[#e85b83] to-[#f39ab3] px-3 py-2.5 text-center text-sm font-semibold text-white transition-transform hover:scale-[1.02]">Choose a Service</Link>
             <Link onClick={closeMenu} to="/my-bookings" className="rounded-xl border border-white/15 px-3 py-2.5 text-center text-sm text-zinc-200">My Bookings</Link>
             <button onClick={handleLogout} className="col-span-2 rounded-xl border border-white/15 px-3 py-2.5 text-sm text-zinc-200">Logout</button>
           </div>

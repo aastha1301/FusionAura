@@ -8,6 +8,8 @@ const bookingSchema = new mongoose.Schema(
     email: { type: String, required: true, lowercase: true, trim: true },
     service: { type: String, required: true, trim: true },
     serviceId: { type: mongoose.Schema.Types.ObjectId, ref: "Service" },
+    packageIncludes: { type: [String], default: [] },
+    addons: [{ serviceId: { type: mongoose.Schema.Types.ObjectId, ref: "Service" }, name: String, priceLabel: String, includes: [String] }],
     date: { type: String, required: true },
     time: { type: String, required: true },
     status: {
