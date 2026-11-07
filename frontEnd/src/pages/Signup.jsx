@@ -43,7 +43,7 @@ function Signup() {
 
   return (
     <div className="min-h-screen bg-[#080709] flex items-center justify-center px-4 py-10">
-      <div className="bg-[#101014] w-full max-w-md p-5 sm:p-8 rounded-2xl shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
+      <div className="motion-card bg-[#101014] w-full max-w-md p-5 sm:p-8 rounded-2xl shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
         <h1 className="text-3xl font-bold text-center text-[#f06b91]">Create Account</h1>
         <p className="text-center text-zinc-500 mt-2 mb-8">Join Fusion Aura</p>
         {error && <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3 rounded-lg mb-5">{error}</div>}
@@ -67,7 +67,7 @@ function Signup() {
             <label className="block text-sm font-medium mb-2">Confirm Password</label>
             <input type="password" value={formData.confirmPassword} onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })} placeholder="Confirm password" className="w-full bg-[#080709] border border-white/10 rounded-lg px-4 py-3" required />
           </div>
-          <button disabled={loading} className="w-full bg-[#e85b83] text-white py-3 rounded-lg font-medium hover:bg-[#c9476d] disabled:opacity-60">
+          <button disabled={loading} className="w-full bg-[#e85b83] text-white py-3 rounded-lg font-medium transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#c9476d] hover:shadow-lg hover:shadow-[#e85b83]/20 active:translate-y-0 disabled:opacity-60">
             {loading ? "Creating account..." : "Create Account"}
           </button>
         </form>

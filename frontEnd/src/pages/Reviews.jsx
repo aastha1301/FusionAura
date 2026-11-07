@@ -29,7 +29,7 @@ function Reviews() {
 
   return <div className="min-h-screen bg-[#080709] px-4 py-10 sm:px-6 sm:py-12"><div className="mx-auto max-w-6xl min-w-0">
     <div className="mb-10 text-center sm:mb-12"><h1 className="text-3xl font-bold text-zinc-100 sm:text-4xl">Customer Reviews</h1><p className="mt-3 text-zinc-400">See what our customers say about Fusion Aura.</p></div>
-    <div className="mx-auto mb-10 max-w-2xl rounded-2xl bg-[#101014] p-5 sm:mb-12 sm:p-8">
+    <div className="simple-card mx-auto mb-10 max-w-2xl rounded-2xl border border-white/10 bg-[#101014] p-5 sm:mb-12 sm:p-8">
       <h2 className="text-2xl font-semibold mb-6">Share Your Experience</h2>
       {!user && <div className="bg-[#080709] p-4 rounded-lg mb-5">Please <Link to="/login" className="text-[#f06b91] font-medium">login</Link> to submit a review.</div>}
       {error && <div className="bg-red-500/10 text-red-400 p-3 rounded-lg mb-5">{error}</div>}
@@ -66,7 +66,7 @@ function Reviews() {
         <button className="w-full rounded-lg bg-[#e85b83] py-3 text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#d9476d] hover:shadow-lg hover:shadow-[#e85b83]/20 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60">Submit Review</button>
       </form>
     </div>
-    <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">{reviews.map(r=><ReviewCard key={r._id} name={r.name} review={r.review} rating={r.rating} />)}</div>
+    <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">{reviews.map((review)=><ReviewCard key={review._id} name={review.name} review={review.review} rating={review.rating} floating={false} />)}</div>
   </div></div>
 }
 export default Reviews

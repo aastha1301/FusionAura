@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import ReviewCard from "../components/ReviewCard"
+import Reveal from "../components/Reveal"
 import { serviceMenus } from "../data/serviceMenus"
 
 function Home() {
 
   const services = useSelector((state) => state.services.services)
-  const servicesReady = useSelector((state) => state.services.hasFetched) && services.every((service) => service.menuId)
+  const servicesReady = useSelector((state) => state.services.hasFetched) && services.length > 0 && services.every((service) => service.menuId)
 
   const reviews = useSelector(
     (state) => state.reviews.reviews
@@ -35,7 +36,7 @@ function Home() {
 
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:px-8">
 
-          <div>
+          <Reveal as="div" className="min-w-0">
 
             <p className="text-[#f06b91] font-medium mb-3">
               ✨ Beauty • Style • Confidence
@@ -72,15 +73,15 @@ function Home() {
 
             </div>
 
-          </div>
+          </Reveal>
 
-          <div>
+          <Reveal as="div" delay={100}>
             <img
               src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1000&q=80"
               alt="Salon"
               className="w-full h-[300px] sm:h-[380px] md:h-[450px] object-cover rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
             />
-          </div>
+          </Reveal>
 
         </div>
 
@@ -92,7 +93,7 @@ function Home() {
 
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 text-center sm:gap-6 sm:px-6 lg:grid-cols-4 lg:px-8">
 
-          <div>
+          <Reveal as="div" delay={0}>
             <div className="text-3xl">💄</div>
             <h3 className="font-semibold mt-2">
               Professional Makeup
@@ -100,9 +101,9 @@ function Home() {
             <p className="text-zinc-500 text-sm mt-1">
               Perfect looks for every occasion.
             </p>
-          </div>
+          </Reveal>
 
-          <div>
+          <Reveal as="div" delay={80}>
             <div className="text-3xl">💇‍♀️</div>
             <h3 className="font-semibold mt-2">
               Expert Styling
@@ -110,9 +111,9 @@ function Home() {
             <p className="text-zinc-500 text-sm mt-1">
               Stylish haircuts and hairstyles.
             </p>
-          </div>
+          </Reveal>
 
-          <div>
+          <Reveal as="div" delay={160}>
             <div className="text-3xl">✨</div>
             <h3 className="font-semibold mt-2">
               Premium Services
@@ -120,9 +121,9 @@ function Home() {
             <p className="text-zinc-500 text-sm mt-1">
               Quality beauty treatments.
             </p>
-          </div>
+          </Reveal>
 
-          <div>
+          <Reveal as="div" delay={240}>
             <div className="text-3xl">❤️</div>
             <h3 className="font-semibold mt-2">
               Happy Customers
@@ -130,7 +131,7 @@ function Home() {
             <p className="text-zinc-500 text-sm mt-1">
               Your satisfaction matters to us.
             </p>
-          </div>
+          </Reveal>
 
         </div>
 
@@ -157,7 +158,7 @@ function Home() {
 
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
             {featuredServices.map((menu, index) => (
-              <Link key={menu.id} to={`/services#${menu.id}`} className="group rounded-2xl border border-[#c9a765]/25 bg-[#100e0d] p-6 transition hover:-translate-y-1 hover:border-[#d8b86e]/60">
+              <Reveal as={Link} key={menu.id} to={`/services#${menu.id}`} delay={index * 75} style={{ "--float-delay": `${-index * 0.7}s`, "--float-duration": `${4.2 + (index % 3) * 0.35}s` }} className="motion-card float-card no-drop group rounded-2xl border border-[#c9a765]/25 bg-[#100e0d] p-6 transition hover:-translate-y-1 hover:border-[#d8b86e]/60">
                 <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#d9b76f]/40 text-2xl text-[#edca83]">{menu.icon}</span>
                 <p className="mt-5 text-[0.65rem] uppercase tracking-[0.24em] text-[#d8b86e]">Menu 0{index + 1}</p>
                 <h3 className="mt-2 font-serif text-xl text-[#fff1cc]">{menu.title}</h3>
@@ -166,7 +167,7 @@ function Home() {
                   <span className="text-xs text-zinc-500">{menu.serviceCount} services</span>
                   <span className="text-sm font-semibold text-[#edca83]">{menu.startingPrice}</span>
                 </div>
-              </Link>
+              </Reveal>
             ))}
           </div>
 
@@ -209,12 +210,13 @@ function Home() {
 
             {featuredReviews.map((review, index) => (
 
+              <Reveal key={review._id || index} delay={index * 90} className="no-drop" style={{ "--float-delay": `${-index * 0.7}s`, "--float-duration": `${4.6 + index * 0.3}s` }}>
               <ReviewCard
-                key={review._id || index}
                 name={review.name}
                 rating={review.rating}
                 review={review.review}
               />
+              </Reveal>
 
             ))}
 
@@ -240,7 +242,7 @@ function Home() {
       {/* CTA */}
       <section className="px-4 py-12 sm:px-6 sm:py-16">
 
-        <div className="mx-auto max-w-5xl rounded-3xl bg-[#101014] p-6 text-center text-white sm:p-10">
+        <div className="motion-card float-card mx-auto max-w-5xl rounded-3xl bg-[#101014] p-6 text-center text-white sm:p-10" style={{ "--float-delay": "-0.8s", "--float-duration": "3.2s" }}>
 
           <h2 className="text-3xl md:text-4xl font-bold">
             Ready for Your New Look?

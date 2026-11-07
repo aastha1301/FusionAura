@@ -88,7 +88,7 @@ function PriceList({ items, menuId, menuTitle, menuDescription, menuNotes, group
         </div>
       ))}
       {selected && createPortal(<div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto overscroll-contain bg-[#09070cdb] px-3 py-4 backdrop-blur-md sm:px-5 sm:py-6" onMouseDown={(event) => { if (event.target === event.currentTarget) setSelected(null) }}>
-        <section role="dialog" aria-modal="true" aria-labelledby="service-details-title" className="relative my-auto max-h-[calc(100dvh-2rem)] w-full max-w-xl overflow-y-auto overscroll-contain rounded-3xl border border-white/15 bg-[#1b151f]/[0.98] shadow-2xl shadow-black/60 backdrop-blur-2xl">
+        <section role="dialog" aria-modal="true" aria-labelledby="service-details-title" className="modal-enter relative my-auto max-h-[calc(100dvh-2rem)] w-full max-w-xl overflow-y-auto overscroll-contain rounded-3xl border border-white/15 bg-[#1b151f]/[0.98] shadow-2xl shadow-black/60 backdrop-blur-2xl">
           <header className="sticky top-0 z-10 border-b border-white/10 bg-[#211923]/95 bg-gradient-to-br from-[#e85b83]/15 via-[#211923]/95 to-[#edca83]/[0.06] px-5 pb-5 pt-6 backdrop-blur-2xl sm:px-7 sm:pb-6">
             <button type="button" autoFocus onClick={() => setSelected(null)} aria-label="Close service details" className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-black/20 text-lg text-zinc-300 transition hover:bg-white/10">×</button>
             <p className="pr-12 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[#edca83]">Service details</p>
@@ -126,7 +126,7 @@ function PriceList({ items, menuId, menuTitle, menuDescription, menuNotes, group
 
 function MenuSection({ menu, index }) {
   return (
-    <section id={menu.id} className="scroll-mt-28 overflow-hidden rounded-[1.75rem] border border-[#c9a765]/35 bg-[#100e0d] shadow-[0_20px_70px_rgba(0,0,0,0.3)]">
+    <section id={menu.id} className="motion-card scroll-mt-28 overflow-hidden rounded-[1.75rem] border border-[#c9a765]/35 bg-[#100e0d] shadow-[0_20px_70px_rgba(0,0,0,0.3)]">
       <div className="relative border-b border-[#c9a765]/20 px-6 py-7 sm:px-9 sm:py-9">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(195,148,70,0.12),transparent_55%)]" />
         <div className="relative flex min-w-0 items-start gap-3 sm:gap-4">
@@ -165,17 +165,18 @@ function MenuSection({ menu, index }) {
 function Services() {
   const services = useSelector((state) => state.services.services)
   const hasFetched = useSelector((state) => state.services.hasFetched)
-  const catalogReady = hasFetched && services.every((service) => service.menuId && service.groupTitle)
+  // An empty API response must keep the local catalog visible; [].every(...) is true.
+  const catalogReady = hasFetched && services.length > 0 && services.every((service) => service.menuId && service.groupTitle)
   const menus = catalogReady
     ? serviceMenus.map((menu) => {
         const menuServices = services.filter((service) => service.menuId === menu.id)
         const groups = menu.groups.flatMap((group) => {
           const groupServices = menuServices.filter((service) => service.groupTitle === group.title)
-          return groupServices.length ? [{ ...group, items: groupServices.map((service) => ({ name: service.name, price: service.priceLabel || `₹${service.price}`, detail: service.time === "As arranged" ? "" : service.time, description: service.description || "", includes: service.includes || [], optionalAddons: service.optionalAddons || [] })) }] : []
+          return groupServices.length ? [{ ...group, items: groupServices.map((service) => ({ name: service.name, price: service.priceLabel || `₹${service.price}`, detail: service.time === "As arranged" ? "" : service.time, description: service.description && service.description !== menu.description && service.description !== "Professional beauty and salon service." ? service.description : "", includes: service.includes || [], optionalAddons: service.optionalAddons || [] })) }] : []
         })
         const extraGroups = [...new Set(menuServices.map((service) => service.groupTitle))]
           .filter((title) => !menu.groups.some((group) => group.title === title))
-          .map((title) => ({ title, items: menuServices.filter((service) => service.groupTitle === title).map((service) => ({ name: service.name, price: service.priceLabel || `₹${service.price}`, detail: service.time === "As arranged" ? "" : service.time, description: service.description || "", includes: service.includes || [], optionalAddons: service.optionalAddons || [] })) }))
+          .map((title) => ({ title, items: menuServices.filter((service) => service.groupTitle === title).map((service) => ({ name: service.name, price: service.priceLabel || `₹${service.price}`, detail: service.time === "As arranged" ? "" : service.time, description: service.description && service.description !== menu.description && service.description !== "Professional beauty and salon service." ? service.description : "", includes: service.includes || [], optionalAddons: service.optionalAddons || [] })) }))
         return { ...menu, groups: [...groups, ...extraGroups] }
       })
     : serviceMenus

@@ -26,7 +26,8 @@ import { fetchReviews } from "./slices/reviewSlice"
 import { fetchServices } from "./slices/serviceSlice"
 
 function CustomerLayout({ children }) {
-  return <><Navbar />{children}<Footer /></>
+  const { pathname } = useLocation()
+  return <><Navbar /><div key={pathname} className="page-enter">{children}</div><Footer /></>
 }
 
 function ScrollManager() {

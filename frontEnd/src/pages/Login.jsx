@@ -34,7 +34,7 @@ function Login() {
   }
   return (
     <div className="min-h-screen bg-[#080709] flex items-center justify-center px-4 py-10">
-      <div className="bg-[#101014] w-full max-w-md p-5 sm:p-8 rounded-2xl shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
+      <div className="motion-card bg-[#101014] w-full max-w-md p-5 sm:p-8 rounded-2xl shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
         <h1 className="text-3xl font-bold text-center text-[#f06b91]">Welcome Back</h1>
         <p className="text-center text-zinc-500 mt-2 mb-8">Login to your Fusion Aura account</p> 
 
@@ -49,7 +49,7 @@ function Login() {
             <label className="block text-sm font-medium mb-2">Password</label>
             <input type="password" name="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} placeholder="Enter password" className="w-full bg-[#080709] border border-white/10 rounded-lg px-4 py-3" />
           </div>
-          <button disabled={loading} className="w-full bg-[#e85b83] text-white py-3 rounded-lg font-medium hover:bg-[#c9476d] disabled:opacity-60">
+          <button disabled={loading} className="w-full bg-[#e85b83] text-white py-3 rounded-lg font-medium transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#c9476d] hover:shadow-lg hover:shadow-[#e85b83]/20 active:translate-y-0 disabled:opacity-60">
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>

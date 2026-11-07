@@ -327,3 +327,140 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   body::before { animation: none; }
 }
+
+/* Shared, restrained motion for page changes, scroll reveals, and interactive cards. */
+.page-enter {
+  animation: page-enter 480ms cubic-bezier(.2, .75, .25, 1) both;
+}
+
+.modal-enter {
+  animation: modal-enter 260ms cubic-bezier(.2, .75, .25, 1) both;
+  transform-origin: center;
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes modal-enter {
+  from { opacity: 0; transform: translateY(12px) scale(.975); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0) scale(.99);
+  filter: blur(5px);
+  transition:
+    opacity 680ms cubic-bezier(.2, .75, .25, 1),
+    transform 680ms cubic-bezier(.2, .75, .25, 1),
+    filter 680ms cubic-bezier(.2, .75, .25, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+  will-change: auto;
+}
+
+.motion-card {
+  transform: none;
+  transition:
+    transform 320ms cubic-bezier(.2, .75, .25, 1),
+    border-color 320ms ease,
+    box-shadow 320ms ease,
+    background-color 320ms ease;
+}
+
+/* Small, steady hover feedback for cards that should stay in place. */
+.simple-card {
+  transition: border-color 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .simple-card:hover {
+    border-color: rgba(255, 231, 241, .2);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .2);
+  }
+}
+
+/* Gentle idle movement for selected customer-facing cards. */
+.float-card {
+  animation: card-float-visible var(--float-duration, 3.4s) ease-in-out var(--float-delay, 0s) infinite;
+  will-change: transform, translate;
+}
+
+@keyframes card-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes card-float-visible {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.scroll-reveal.is-visible.float-card,
+.scroll-reveal.is-visible .float-card {
+  animation-name: card-float-visible, card-drop-in;
+  animation-duration: var(--float-duration, 3.4s), 560ms;
+  animation-delay: var(--float-delay, 0s), 0ms;
+  animation-timing-function: ease-in-out, cubic-bezier(.2, .75, .25, 1);
+  animation-iteration-count: infinite, 1;
+  animation-fill-mode: none, both;
+}
+
+.scroll-reveal.is-visible.float-card.no-drop,
+.scroll-reveal.is-visible.no-drop .float-card {
+  animation-name: card-float;
+  animation-duration: var(--float-duration, 3.4s);
+  animation-delay: var(--float-delay, 0s);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: none;
+}
+
+@keyframes card-drop-in {
+  0% { translate: 0 -52px; }
+  72% { translate: 0 5px; }
+  100% { translate: 0 0; }
+}
+
+a, button, input, textarea, select {
+  transition-timing-function: cubic-bezier(.2, .75, .25, 1);
+}
+
+a, button {
+  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+  transition-duration: 180ms;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .motion-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 231, 241, .32) !important;
+    box-shadow: 0 28px 72px rgba(0, 0, 0, .38), 0 1px 0 rgba(255, 255, 255, .16) inset;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .modal-enter { animation: none; }
+  .float-card { animation: none !important; translate: none !important; rotate: none !important; will-change: auto; }
+}

@@ -90,7 +90,7 @@ function Contact() {
         <div className="grid gap-5 lg:grid-cols-2 lg:gap-8">
 
           
-          <div className="rounded-2xl bg-[#101014] p-5 shadow-sm sm:p-8">
+          <div className="simple-card rounded-2xl border border-white/10 bg-[#101014] p-5 shadow-sm sm:p-8">
 
             <p className="text-[#f06b91] uppercase tracking-widest text-sm">
               Contact Information
@@ -175,7 +175,7 @@ function Contact() {
 
 
           
-          <div className="rounded-2xl bg-[#101014] p-5 shadow-sm sm:p-8">
+          <div className="simple-card rounded-2xl border border-white/10 bg-[#101014] p-5 shadow-sm sm:p-8">
 
             <h2 className="text-2xl font-bold">
               Send Us A Message

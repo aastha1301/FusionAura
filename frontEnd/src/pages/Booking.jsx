@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link, useLocation, useSearchParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { addBooking } from "../slices/bookingSlice"
+import Reveal from "../components/Reveal"
 import { bookingServices as defaultBookingServices, findCatalogService } from "../data/serviceMenus"
 
 function serviceKey(service) {
@@ -15,7 +16,7 @@ function Booking() {
   const user = useSelector((state) => state.auth.user)
   const token = useSelector((state) => state.auth.token)
   const services = useSelector((state) => state.services.services)
-  const servicesReady = useSelector((state) => state.services.hasFetched) && services.every((service) => service.menuId)
+  const servicesReady = useSelector((state) => state.services.hasFetched) && services.length > 0 && services.every((service) => service.menuId)
   const bookingOptions = servicesReady
     ? services.map((service) => {
         const catalog = findCatalogService(service.menuId, service.groupTitle, service.name)
@@ -116,7 +117,7 @@ function Booking() {
 
   if (success) {
     return <main className="min-h-screen bg-[#080709] flex items-center justify-center px-4 py-10">
-      <section className="bg-[#101014] p-7 sm:p-10 rounded-2xl max-w-lg w-full">
+      <section className="motion-card bg-[#101014] p-7 sm:p-10 rounded-2xl max-w-lg w-full">
         <div className="text-center"><div className="text-5xl mb-4">✅</div><h1 className="text-3xl font-bold text-zinc-100">Booking requested</h1><p className="text-zinc-400 mt-3">Fusion Aura will contact you to confirm the appointment.</p></div>
         <div className="mt-7 rounded-xl border border-white/10 bg-white/[0.03] p-5">
           <p className="text-xs font-semibold uppercase tracking-wider text-[#f0a7bd]">{success.selections.length === 1 ? "Your service" : "Your combo"}</p>
@@ -146,7 +147,7 @@ function Booking() {
 
       {error && <div role="alert" className="mb-5 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-5">
-          <section className="rounded-2xl border border-white/10 bg-[#101014] p-5 sm:p-6">
+          <Reveal as="section" className="motion-card rounded-2xl border border-white/10 bg-[#101014] p-5 sm:p-6">
             <div className="mb-5 flex items-center gap-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-[#e85b83]/20 text-sm font-bold text-[#ffc5d6]">1</span><div><h2 className="font-semibold text-white">Services for this booking</h2><p className="text-xs text-zinc-400">Choose one for a single service, or add more to make a combo.</p></div></div>
 
             <label htmlFor="service-to-add" className="mb-2 block text-sm font-medium text-zinc-200">Select a service from the menu</label>
@@ -170,9 +171,9 @@ function Booking() {
               </li>)}</ul> : <p className="rounded-xl border border-dashed border-white/15 p-4 text-center text-sm text-zinc-400">Your selected services will appear here. Search above to add one.</p>}
               {selectedServices.length >= 5 && <p className="mt-2 text-xs text-zinc-500">You’ve reached the five-service limit for one booking.</p>}
             </div>
-          </section>
+          </Reveal>
 
-        <section className="rounded-2xl border border-white/10 bg-[#101014] p-5 sm:p-7">
+        <Reveal as="section" delay={90} className="motion-card rounded-2xl border border-white/10 bg-[#101014] p-5 sm:p-7">
           <div className="mb-5 flex items-center gap-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-[#e85b83]/20 text-sm font-bold text-[#ffc5d6]">2</span><div><h2 className="font-semibold text-white">Appointment details</h2><p className="text-xs text-zinc-400">Your contact, then your preferred time.</p></div></div>
 
           <div className="space-y-5">
@@ -196,7 +197,7 @@ function Booking() {
             <div className="min-w-0 rounded-2xl border border-[#edca83]/15 bg-gradient-to-br from-[#edca83]/[0.07] to-white/[0.025] p-4"><div className="flex items-center justify-between gap-3"><p className="text-xs font-semibold uppercase tracking-wider text-zinc-300">Your booking</p><span className="rounded-full bg-white/[0.05] px-2.5 py-1 text-[0.65rem] text-zinc-400">{selectedServices.length === 1 ? "Single" : selectedServices.length > 1 ? "Combo" : "No service"}</span></div>{selectedServices.length > 0 ? <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">{selectedServices.map((item) => <li key={serviceKey(item)} className="flex gap-3 text-xs"><span className="text-zinc-300">{item.serviceName}</span><span className="shrink-0 text-[#edca83]">{item.price}</span></li>)}</ul> : <p className="mt-2 text-xs text-zinc-500">Add a service to see your summary.</p>}<p className="mt-3 border-t border-white/10 pt-3 text-xs leading-5 text-zinc-400">The salon will confirm availability and the final price with you.</p></div>
             <button disabled={loading || selectedServices.length === 0} className="mt-3 w-full rounded-xl bg-gradient-to-r from-[#e85b83] to-[#f39ab3] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-[#e85b83]/15 transition duration-200 ease-out hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#e85b83]/20 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:min-w-52">{loading ? "Sending request…" : "Book appointment"}</button>
           </div>
-        </section>
+        </Reveal>
       </form>
     </div>
   </main>

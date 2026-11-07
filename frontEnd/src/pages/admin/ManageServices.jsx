@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addService, updateService, deleteService } from "../../slices/serviceSlice"
 import { serviceMenus } from "../../data/serviceMenus"
+import Reveal from "../../components/Reveal"
 
 const firstMenu = serviceMenus[0]
 const emptyForm = {
@@ -124,7 +125,7 @@ function ManageServices() {
 
         {(error || message) && <div className={`mb-5 rounded-xl border p-3 text-sm ${error ? "border-red-500/20 bg-red-500/10 text-red-400" : "border-green-500/20 bg-green-500/10 text-green-400"}`}>{error || message}</div>}
 
-        <section className="mb-9 rounded-3xl border border-[#c9a765]/30 bg-[#100e0d] p-5 sm:p-7">
+        <section className="motion-card mb-9 rounded-3xl border border-[#c9a765]/30 bg-[#100e0d] p-5 sm:p-7">
           <div className="mb-5 flex items-center justify-between gap-3">
             <div>
               <p className="text-xs uppercase tracking-[0.2em] text-[#d8b86e]">{editId ? "Update menu item" : "Quick add"}</p>
@@ -185,7 +186,7 @@ function ManageServices() {
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {serviceMenus.map((menu, index) => {
             const count = services.filter((service) => service.menuId === menu.id).length
-            return <div key={menu.id} className="rounded-2xl border border-[#c9a765]/25 bg-[#100e0d] p-4"><span className="text-xs tracking-[0.2em] text-[#d8b86e]">MENU 0{index + 1}</span><h2 className="mt-2 font-serif text-lg text-[#fff1cc]">{menu.title}</h2><p className="mt-1 text-xs text-zinc-500">{count} services</p><button onClick={() => startAddingTo(menu)} className="mt-4 rounded-lg border border-[#d6b16d]/30 px-3 py-2 text-xs text-[#edca83] hover:bg-[#d6b16d]/10">+ Add service here</button></div>
+            return <Reveal key={menu.id} delay={index * 65} className="motion-card rounded-2xl border border-[#c9a765]/25 bg-[#100e0d] p-4"><span className="text-xs tracking-[0.2em] text-[#d8b86e]">MENU 0{index + 1}</span><h2 className="mt-2 font-serif text-lg text-[#fff1cc]">{menu.title}</h2><p className="mt-1 text-xs text-zinc-500">{count} services</p><button onClick={() => startAddingTo(menu)} className="mt-4 rounded-lg border border-[#d6b16d]/30 px-3 py-2 text-xs text-[#edca83] transition hover:bg-[#d6b16d]/10">+ Add service here</button></Reveal>
           })}
         </div>
 
@@ -194,7 +195,7 @@ function ManageServices() {
             const menuServices = services.filter((service) => service.menuId === menu.id)
             const groupTitles = [...new Set([...menu.groups.map((group) => group.title), ...menuServices.map((service) => service.groupTitle).filter(Boolean)])]
             return (
-              <section id={`admin-${menu.id}`} key={menu.id} className="scroll-mt-24 overflow-hidden rounded-3xl border border-[#c9a765]/30 bg-[#100e0d]">
+              <Reveal as="section" id={`admin-${menu.id}`} key={menu.id} delay={index * 70} className="motion-card scroll-mt-24 overflow-hidden rounded-3xl border border-[#c9a765]/30 bg-[#100e0d]">
                 <div className="border-b border-[#c9a765]/20 bg-[radial-gradient(ellipse_at_top_right,rgba(195,148,70,0.12),transparent_60%)] px-5 py-6 sm:px-8">
                   <p className="text-xs uppercase tracking-[0.23em] text-[#d8b86e]">Menu 0{index + 1} · {menu.eyebrow}</p>
                   <h2 className="mt-2 font-serif text-2xl text-[#fff1cc] sm:text-3xl">{menu.title}</h2>
@@ -216,7 +217,7 @@ function ManageServices() {
                   })}
                   {menuServices.length === 0 && <p className="text-sm text-zinc-500">No services in this menu yet. Use the form above to add one.</p>}
                 </div>
-              </section>
+              </Reveal>
             )
           })}
         </div>

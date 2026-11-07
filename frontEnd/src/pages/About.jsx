@@ -1,9 +1,11 @@
+import Reveal from "../components/Reveal"
+
 function About() {
   return (
     <div className="bg-[#101014] min-h-screen">
 
      
-      <section className="bg-[#080709] py-16">
+      <Reveal as="section" className="bg-[#080709] py-12 sm:py-16">
         <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
           <p className="text-[#f06b91] uppercase tracking-widest text-sm">
             About Fusion Aura
@@ -21,11 +23,11 @@ function About() {
 
           <div className="mx-auto mt-5 h-1 w-20 rounded bg-[#e85b83]"></div>
         </div>
-      </section>
+      </Reveal>
 
 
      
-      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+      <Reveal as="section" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
 
           
@@ -68,11 +70,11 @@ function About() {
           </div>
 
         </div>
-      </section>
+      </Reveal>
 
 
    
-      <section className="bg-[#080709] py-12 sm:py-16">
+      <Reveal as="section" className="bg-[#080709] py-12 sm:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
           <div className="text-center mb-10">
@@ -87,7 +89,7 @@ function About() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-            <div className="bg-[#101014] p-6 rounded-2xl text-center shadow-sm">
+            <Reveal as="div" delay={0} style={{ "--float-delay": "-0.3s", "--float-duration": "2.9s" }} className="motion-card float-card rounded-2xl bg-[#101014] p-6 text-center shadow-sm">
               <div className="text-3xl">💎</div>
               <h3 className="font-semibold text-lg mt-4">
                 Quality Products
@@ -95,9 +97,9 @@ function About() {
               <p className="text-zinc-500 text-sm mt-2">
                 We focus on using quality beauty products for our services.
               </p>
-            </div>
+            </Reveal>
 
-            <div className="bg-[#101014] p-6 rounded-2xl text-center shadow-sm">
+            <Reveal as="div" delay={80} style={{ "--float-delay": "-0.7s", "--float-duration": "3.1s" }} className="motion-card float-card rounded-2xl bg-[#101014] p-6 text-center shadow-sm">
               <div className="text-3xl">✨</div>
               <h3 className="font-semibold text-lg mt-4">
                 Professional Service
@@ -105,9 +107,9 @@ function About() {
               <p className="text-zinc-500 text-sm mt-2">
                 Our services are provided with care and attention to detail.
               </p>
-            </div>
+            </Reveal>
 
-            <div className="bg-[#101014] p-6 rounded-2xl text-center shadow-sm">
+            <Reveal as="div" delay={160} style={{ "--float-delay": "-1.1s", "--float-duration": "3s" }} className="motion-card float-card rounded-2xl bg-[#101014] p-6 text-center shadow-sm">
               <div className="text-3xl">🌸</div>
               <h3 className="font-semibold text-lg mt-4">
                 Comfortable Environment
@@ -115,9 +117,9 @@ function About() {
               <p className="text-zinc-500 text-sm mt-2">
                 Enjoy a clean, peaceful and comfortable salon experience.
               </p>
-            </div>
+            </Reveal>
 
-            <div className="bg-[#101014] p-6 rounded-2xl text-center shadow-sm">
+            <Reveal as="div" delay={240} style={{ "--float-delay": "-1.4s", "--float-duration": "3.3s" }} className="motion-card float-card rounded-2xl bg-[#101014] p-6 text-center shadow-sm">
               <div className="text-3xl">❤️</div>
               <h3 className="font-semibold text-lg mt-4">
                 Client Satisfaction
@@ -125,11 +127,11 @@ function About() {
               <p className="text-zinc-500 text-sm mt-2">
                 We focus on understanding and meeting our clients' needs.
               </p>
-            </div>
+            </Reveal>
 
           </div>
         </div>
-      </section>
+      </Reveal>
 
 
       
@@ -137,26 +139,26 @@ function About() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="grid gap-6 text-center md:grid-cols-3">
 
-            <div>
+            <Reveal as="div" delay={0}>
               <h2 className="text-4xl font-bold text-[#f06b91]">8+</h2>
               <p className="text-zinc-500 mt-2">
                 Beauty Services
               </p>
-            </div>
+            </Reveal>
 
-            <div>
+            <Reveal as="div" delay={90}>
               <h2 className="text-4xl font-bold text-[#f06b91]">100+</h2>
               <p className="text-zinc-500 mt-2">
                 Happy Clients
               </p>
-            </div>
+            </Reveal>
 
-            <div>
+            <Reveal as="div" delay={180}>
               <h2 className="text-4xl font-bold text-[#f06b91]">5★</h2>
               <p className="text-zinc-500 mt-2">
                 Customer Experience
               </p>
-            </div>
+            </Reveal>
 
           </div>
         </div>

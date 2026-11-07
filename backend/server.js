@@ -53,7 +53,8 @@ async function seedData() {
 
   const settings = mongoose.connection.collection("appsettings")
   const menuSync = await settings.findOne({ _id: "serviceMenuVersion" })
-  if (!menuSync || menuSync.version < 2) {
+  const serviceCount = await Service.countDocuments()
+  if (!menuSync || menuSync.version < 2 || serviceCount === 0) {
     // Replace legacy service documents once while preserving bookings, which store names as text.
     await Service.deleteMany({})
     const seededServices = serviceMenuCatalog.menus.flatMap((menu) =>
@@ -67,7 +68,7 @@ async function seedData() {
           price: numericPrice,
           priceLabel: item.price,
           time: item.detail || "As arranged",
-          description: menu.description,
+          description: item.description || "Professional beauty and salon service.",
           includes: item.includes || [],
           optionalAddons: item.optionalAddons || [],
           image: ""

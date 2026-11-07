@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchMyBookings } from "../slices/bookingSlice"
+import Reveal from "../components/Reveal"
 
 function MyBookings() {
   const dispatch = useDispatch()
@@ -9,10 +10,20 @@ function MyBookings() {
   const token = useSelector((state) => state.auth.token)
   const { myBookings, loadingMy, errorMy } = useSelector((state) => state.bookings)
   const userId = user?._id || user?.id
-  const bookings = myBookings.filter((booking) => String(booking.user?._id || booking.user || "") === String(userId || ""))
+  // Keep the customer boundary on both the API and UI sides, even if cached or
+  // delayed data from a previous session reaches this screen.
+  const bookings = myBookings.filter((booking) => {
+    const owner = booking.user
+    const bookingUserId = owner?._id || owner?.id || owner
+    return String(bookingUserId || "") === String(userId || "")
+  })
+
+  const retryLoad = () => {
+    if (token) dispatch(fetchMyBookings(token))
+  }
 
   useEffect(() => {
-    if (!user || !token) return undefined
+    if (!userId || !token) return undefined
     const request = dispatch(fetchMyBookings(token))
     return () => request.abort()
   }, [dispatch, token, userId])
@@ -33,13 +44,12 @@ function MyBookings() {
         <h1 className="text-3xl font-bold text-white sm:text-4xl">My Bookings</h1>
         <p className="text-gray-400 mt-3">View your appointment details and status.</p>
       </div>
-      {errorMy && <div role="alert" className="mb-5 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">{errorMy}</div>}
-      {loadingMy ? <div role="status" className="rounded-2xl border border-white/10 bg-[#111013] p-8 text-center text-sm text-zinc-300">Loading your bookings…</div> : bookings.length === 0 ? <div className="bg-[#111013] border border-[#302128] rounded-2xl p-8 sm:p-10 text-center">
+      {errorMy ? <div role="alert" className="rounded-2xl border border-red-500/20 bg-red-500/10 p-6 text-center"><p className="text-sm text-red-300">{errorMy}</p><button type="button" onClick={retryLoad} className="mt-4 rounded-lg border border-red-300/20 px-4 py-2 text-sm text-red-200 transition hover:bg-red-500/10">Try again</button></div> : loadingMy ? <div role="status" className="rounded-2xl border border-white/10 bg-[#111013] p-8 text-center text-sm text-zinc-300">Loading your bookings…</div> : bookings.length === 0 ? <div className="bg-[#111013] border border-[#302128] rounded-2xl p-8 sm:p-10 text-center">
         <div className="text-5xl mb-4">📅</div>
         <h2 className="text-2xl font-semibold text-white">No Bookings Yet</h2>
         <p className="text-gray-400 mt-2 mb-6">Choose a service from the menu to get started.</p>
         <Link to="/services" className="bg-[#e85b83] text-white px-6 py-3 rounded-lg">Browse services</Link>
-      </div> : <div className="space-y-5">{bookings.map((booking) => <article key={booking._id} className="bg-[#111013] border border-[#302128] rounded-2xl p-5 sm:p-6">
+      </div> : <div className="space-y-5">{bookings.map((booking, index) => <Reveal as="article" key={booking._id} delay={index % 5 * 70} className="motion-card rounded-2xl border border-[#302128] bg-[#111013] p-5 sm:p-6">
         <div className="flex flex-col gap-5 sm:flex-row sm:justify-between">
           <div className="min-w-0">
             <h2 className="break-words text-xl font-semibold text-white">{booking.service}</h2>
@@ -59,7 +69,7 @@ function MyBookings() {
           </div>
           <span className={`self-start rounded-full px-4 py-2 text-sm ${booking.status === "Pending" ? "bg-yellow-500/10 text-yellow-400" : booking.status === "Confirmed" ? "bg-green-500/10 text-green-400" : "bg-red-500/10 text-red-400"}`}>{booking.status}</span>
         </div>
-      </article>)}</div>}
+      </Reveal>)}</div>}
     </div>
   </main>
 }

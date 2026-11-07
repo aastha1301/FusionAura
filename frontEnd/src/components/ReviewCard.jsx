@@ -1,6 +1,6 @@
-function ReviewCard({ name, review, rating }) {
+function ReviewCard({ name, review, rating, floating = true }) {
   return (
-    <div className="bg-[#101014] border border-white/10 rounded-2xl p-6 shadow-[0_15px_40px_rgba(0,0,0,0.30)] hover:border-[#e85b83]/30 transition">
+    <div className={`${floating ? "motion-card float-card hover:border-[#e85b83]/30 transition" : "simple-card border border-white/10"} bg-[#101014] rounded-2xl p-6 shadow-[0_15px_40px_rgba(0,0,0,0.30)]`}>
       <div className="flex items-center justify-between gap-3 mb-4">
         <div className="flex min-w-0 items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-[#1b1015] border border-[#e85b83]/30 flex items-center justify-center text-[#f06b91] font-semibold">
