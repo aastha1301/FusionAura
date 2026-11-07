@@ -1,5 +1,5 @@
 const host = typeof window !== "undefined" ? window.location.hostname : "localhost"
-export const SERVER_URL = `http://${host}:5000`
+export const SERVER_URL = "https://fusionaura.onrender.com";
 export const API_URL = `${SERVER_URL}/api`
 
 export async function apiRequest(path, options = {}, token = null) {

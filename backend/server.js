@@ -21,7 +21,13 @@ const app = express()
 const uploadsPath = path.join(__dirname, "uploads")
 fs.mkdirSync(uploadsPath, { recursive: true })
 
-app.use(cors())
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://fusion-aura-9fhz0euji-fusion-aura.vercel.app"
+  ],
+  credentials: true
+}));
 app.use(express.json())
 app.use("/uploads", express.static(uploadsPath))
 
